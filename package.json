@@ -1,0 +1,36 @@
+{
+  "name": "hts221-sensor",
+  "version": "0.0.1",
+  "description": "HTS221 I2C humidity and temperature sensor",
+  "main": "hts221-sensor.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Tests can only be run manually from the command line.\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fivdi/hts221-sensor.git"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {
+    "i2c-bus": "^4.0.1"
+  },
+  "keywords": [
+    "linux",
+    "beaglebone",
+    "pi",
+    "raspberry",
+    "i2c",
+    "sensor",
+    "temperature",
+    "humidity"
+  ],
+  "author": "fivdi",
+  "license": "MIT"
+}
+
