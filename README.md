@@ -94,7 +94,7 @@ object have been freed.
 Returns a promise for an object containing a
 [sensor reading](#sensor-reading).
 
-### Seosor Reading
+### Sensor Reading
 - celsius - number, temperature in degrees Celsius
 - humidity - number, relative humidity in percent
 
