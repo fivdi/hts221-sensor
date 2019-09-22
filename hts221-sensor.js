@@ -15,7 +15,7 @@ const CTRL_REG1 = 0x20;
 const HUMIDITY_OUT_L_REG = 0x28;
 const CALIB_REG0 = 0x30;
 
-const validateOpenOptions = (options) => {
+const validateOpenOptions = options => {
   if (typeof options !== 'object') {
     return 'Expected options to be of type object.' +
       ' Got type ' + typeof options + '.';
@@ -64,7 +64,7 @@ class Hts221I2c {
 
   writeByte(register, byte) {
     return new Promise((resolve, reject) => {
-      this._i2cBus.writeByte(this._i2cAddress, register, byte, (err) => {
+      this._i2cBus.writeByte(this._i2cAddress, register, byte, err => {
         if (err) {
           reject(err);
         } else {
@@ -93,7 +93,7 @@ class Hts221I2c {
     let hts221I2c;
 
     return new Promise((resolve, reject) => {
-      const i2cBus = i2c.open(i2cBusNumber, (err) => {
+      const i2cBus = i2c.open(i2cBusNumber, err => {
         if (err) {
           reject(err);
           return;
@@ -103,9 +103,9 @@ class Hts221I2c {
 
         resolve();
       });
-    }).then(() => {
+    }).then(_ => {
       return hts221I2c.whoAmI();
-    }).then((whoAmI) => {
+    }).then(whoAmI => {
       if (whoAmI !== WHO_AM_I) {
         return Promise.reject(new Error(
           'Expected WHO_AM_I register to be 0x' + WHO_AM_I.toString(16) +
@@ -114,7 +114,7 @@ class Hts221I2c {
       }
 
       return hts221I2c.configure();
-    }).then(() => {
+    }).then(_ => {
       return hts221I2c;
     });
   }
@@ -124,16 +124,16 @@ class Hts221I2c {
   }
 
   configure() {
-    return this.writeByte(CTRL_REG1, 0x87).then(() => {
+    return this.writeByte(CTRL_REG1, 0x87).then(_ => {
       return this.readCalibrationData();
-    }).then((calibrationData) => {
+    }).then(calibrationData => {
       this._calibrationData = calibrationData;
     });
   }
 
   close() {
     return new Promise((resolve, reject) => {
-      this._i2cBus.close((err) => {
+      this._i2cBus.close(err => {
         if (err) {
           reject(err);
         } else {
@@ -148,7 +148,7 @@ class Hts221I2c {
 
     return this.readI2cBlock(
       CALIB_REG0 | 0x80, calibRegs.length, calibRegs
-    ).then((calibRegs) => {
+    ).then(calibRegs => {
       return {
         h0_rH: calibRegs[0] / 2,
         h1_rH: calibRegs[1] / 2,
@@ -167,7 +167,7 @@ class Hts221I2c {
 
     return this.readI2cBlock(
       HUMIDITY_OUT_L_REG | 0x80, rawData.length, rawData
-    ).then((rawData) => {
+    ).then(rawData => {
       const interpolate = (x, x1, x2, y1, y2) =>
         y1 + (x - x1) * (y2 - y1) / (x2 - x1);
 
@@ -197,7 +197,7 @@ class Hts221 {
   }
 
   static open(options) {
-    return Promise.resolve().then(() => {
+    return Promise.resolve().then(_ => {
       options = options || {};
 
       const errMsg = validateOpenOptions(options);
@@ -211,7 +211,7 @@ class Hts221 {
         DEFAULT_I2C_ADDRESS : options.i2cAddress;
 
       return Hts221I2c.open(i2cBusNumber, i2cAddress);
-    }).then((hts221I2c) => {
+    }).then(hts221I2c => {
       return new Hts221(hts221I2c);
     });
   }

@@ -1,17 +1,13 @@
 'use strict';
 
-const Hts221 = require('../');
+const hts221 = require('../');
 
-let hts221;
-
-Hts221.open().then((sensor) => {
-  hts221 = sensor;
-  return hts221.read();
-}).then((reading) => {
-  console.log('celsius: ' + reading.celsius);
-  console.log('humidity: ' + reading.humidity);
-  return hts221.close();
-}).catch((err) => {
-  console.log(err);
-});
+hts221.open().then(sensor =>
+  sensor.read().
+  then(reading => {
+    console.log('celsius: ' + reading.celsius);
+    console.log('humidity: ' + reading.humidity);
+  }).
+  then(_ => sensor.close())
+).catch(console.log);
 
