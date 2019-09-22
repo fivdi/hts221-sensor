@@ -1,5 +1,5 @@
-Unpublished
-===========
+1.0.0 / Sep 22 2019
+===================
 
   * update dependencies (i2c-bus v5.0.0)
   * improve style

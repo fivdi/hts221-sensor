@@ -1,6 +1,6 @@
 {
   "name": "hts221-sensor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "HTS221 I2C humidity and temperature sensor",
   "main": "hts221-sensor.js",
   "scripts": {

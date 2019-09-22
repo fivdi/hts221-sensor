@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/fivdi/hts221-sensor.svg?branch=master)](https://travis-ci.org/fivdi/hts221-sensor)
+[![npm Version](http://img.shields.io/npm/v/hts221-sensor.svg)](https://www.npmjs.com/package/hts221-sensor)
+[![Downloads Per Month](http://img.shields.io/npm/dm/hts221-sensor.svg)](https://www.npmjs.com/package/hts221-sensor)
+
 # hts221-sensor
 
 HTS221 I2C temperature and humidity sensor module for Node.js on Linux boards
