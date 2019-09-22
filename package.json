@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "description": "HTS221 I2C humidity and temperature sensor",
   "main": "hts221-sensor.js",
-  "directories": {
-    "example": "example",
-    "test": "test"
-  },
   "scripts": {
     "lint": "jshint *.js examples/*.js"
   },
@@ -15,7 +11,7 @@
     "url": "https://github.com/fivdi/hts221-sensor.git"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "dependencies": {
     "i2c-bus": "^5.0.0"
