@@ -18,7 +18,7 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "i2c-bus": "^4.0.1"
+    "i2c-bus": "^5.0.0"
   },
   "keywords": [
     "linux",
