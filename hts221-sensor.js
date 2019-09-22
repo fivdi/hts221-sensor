@@ -51,71 +51,34 @@ class Hts221I2c {
   }
 
   readByte(register) {
-    return new Promise((resolve, reject) => {
-      this._i2cBus.readByte(this._i2cAddress, register, (err, byte) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(byte);
-        }
-      });
-    });
+    return this._i2cBus.readByte(this._i2cAddress, register);
   }
 
   writeByte(register, byte) {
-    return new Promise((resolve, reject) => {
-      this._i2cBus.writeByte(this._i2cAddress, register, byte, err => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
+    return this._i2cBus.writeByte(this._i2cAddress, register, byte);
   }
 
   readI2cBlock(register, length, buffer) {
-    return new Promise((resolve, reject) => {
-      this._i2cBus.readI2cBlock(
-        this._i2cAddress, register, length, buffer,
-        (err, bytesRead, buffer) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(buffer);
-          }
-        }
-      );
-    });
+    return this._i2cBus.readI2cBlock(
+      this._i2cAddress, register, length, buffer
+    );
   }
 
   static open(i2cBusNumber, i2cAddress) {
-    let hts221I2c;
+    return i2c.openPromisified(i2cBusNumber).then(i2cBus => {
+      const hts221I2c = new Hts221I2c(i2cBus, i2cAddress);
 
-    return new Promise((resolve, reject) => {
-      const i2cBus = i2c.open(i2cBusNumber, err => {
-        if (err) {
-          reject(err);
-          return;
+      return hts221I2c.whoAmI().
+      then(whoAmI => {
+        if (whoAmI !== WHO_AM_I) {
+          return Promise.reject(new Error(
+            'Expected WHO_AM_I register to be 0x' + WHO_AM_I.toString(16) +
+            '. Got 0x' + whoAmI.toString(16) + '. HTS221 sensor not found.'
+          ));
         }
-
-        hts221I2c = new Hts221I2c(i2cBus, i2cAddress);
-
-        resolve();
-      });
-    }).then(_ => {
-      return hts221I2c.whoAmI();
-    }).then(whoAmI => {
-      if (whoAmI !== WHO_AM_I) {
-        return Promise.reject(new Error(
-          'Expected WHO_AM_I register to be 0x' + WHO_AM_I.toString(16) +
-          '. Got 0x' + whoAmI.toString(16) + '. HTS221 sensor not found.'
-        ));
-      }
-
-      return hts221I2c.configure();
-    }).then(_ => {
-      return hts221I2c;
+      }).
+      then(_ => hts221I2c.configure()).
+      then(_ => hts221I2c);
     });
   }
 
@@ -124,23 +87,15 @@ class Hts221I2c {
   }
 
   configure() {
-    return this.writeByte(CTRL_REG1, 0x87).then(_ => {
-      return this.readCalibrationData();
-    }).then(calibrationData => {
+    return this.writeByte(CTRL_REG1, 0x87).
+    then(_ => this.readCalibrationData()).
+    then(calibrationData => {
       this._calibrationData = calibrationData;
     });
   }
 
   close() {
-    return new Promise((resolve, reject) => {
-      this._i2cBus.close(err => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
+    return this._i2cBus.close();
   }
 
   readCalibrationData() {
@@ -148,7 +103,7 @@ class Hts221I2c {
 
     return this.readI2cBlock(
       CALIB_REG0 | 0x80, calibRegs.length, calibRegs
-    ).then(calibRegs => {
+    ).then(_ => {
       return {
         h0_rH: calibRegs[0] / 2,
         h1_rH: calibRegs[1] / 2,
@@ -167,7 +122,7 @@ class Hts221I2c {
 
     return this.readI2cBlock(
       HUMIDITY_OUT_L_REG | 0x80, rawData.length, rawData
-    ).then(rawData => {
+    ).then(_ => {
       const interpolate = (x, x1, x2, y1, y2) =>
         y1 + (x - x1) * (y2 - y1) / (x2 - x1);
 
@@ -211,9 +166,7 @@ class Hts221 {
         DEFAULT_I2C_ADDRESS : options.i2cAddress;
 
       return Hts221I2c.open(i2cBusNumber, i2cAddress);
-    }).then(hts221I2c => {
-      return new Hts221(hts221I2c);
-    });
+    }).then(hts221I2c => new Hts221(hts221I2c));
   }
 
   close() {
