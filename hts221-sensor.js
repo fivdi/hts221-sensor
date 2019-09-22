@@ -37,7 +37,7 @@ const validateOpenOptions = options => {
       )
      ) {
     return 'Expected i2cAddress to be an integer' +
-      ' >= 0 and <= 0x7f. Got "' + options.i2cAddress + '".'
+      ' >= 0 and <= 0x7f. Got "' + options.i2cAddress + '".';
   }
 
   return null;
@@ -148,7 +148,7 @@ class Hts221I2c {
 
 class Hts221 {
   constructor(hts221I2c) {
-    this._hts221I2c = hts221I2c
+    this._hts221I2c = hts221I2c;
   }
 
   static open(options) {

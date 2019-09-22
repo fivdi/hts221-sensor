@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Tests can only be run manually from the command line.\" && exit 1"
+    "lint": "jshint *.js examples/*.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,9 @@
   },
   "dependencies": {
     "i2c-bus": "^5.0.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.2"
   },
   "keywords": [
     "linux",
@@ -33,4 +36,3 @@
   "author": "fivdi",
   "license": "MIT"
 }
-
