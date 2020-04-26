@@ -1,3 +1,8 @@
+Unpublished
+===========
+
+  * update dependencies (i2c-bus v5.2.0, jshint v2.11.0)
+
 1.0.0 / Sep 22 2019
 ===================
 
