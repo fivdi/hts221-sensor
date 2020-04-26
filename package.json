@@ -11,7 +11,7 @@
     "url": "https://github.com/fivdi/hts221-sensor.git"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "dependencies": {
     "i2c-bus": "^5.2.0"
