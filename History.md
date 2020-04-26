@@ -1,5 +1,5 @@
-Unpublished
-===========
+1.1.0 / Apr 26 2020
+===================
 
   * update dependencies (i2c-bus v5.2.0, jshint v2.11.0)
   * drop support for node.js 6, add support for node.js 14
