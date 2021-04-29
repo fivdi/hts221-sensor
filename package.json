@@ -14,10 +14,10 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "i2c-bus": "^5.2.0"
+    "i2c-bus": "^5.2.2"
   },
   "devDependencies": {
-    "jshint": "^2.11.0"
+    "jshint": "^2.12.0"
   },
   "keywords": [
     "linux",
