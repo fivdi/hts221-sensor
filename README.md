@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fivdi/hts221-sensor.svg?branch=master)](https://travis-ci.org/fivdi/hts221-sensor)
+[![Build Status](https://app.travis-ci.com/fivdi/hts221-sensor.svg?branch=master)](https://app.travis-ci.com/github/fivdi/hts221-sensor)
 [![npm Version](http://img.shields.io/npm/v/hts221-sensor.svg)](https://www.npmjs.com/package/hts221-sensor)
 [![Downloads Per Month](http://img.shields.io/npm/dm/hts221-sensor.svg)](https://www.npmjs.com/package/hts221-sensor)
 
