@@ -1,3 +1,8 @@
+unpublished
+===========
+
+  * drop support for node.js 15, add support for node.js 17
+
 1.1.1 / Apr 29 2021
 ===================
 

@@ -7,7 +7,7 @@
 HTS221 I2C temperature and humidity sensor module for Node.js on Linux boards
 like the Raspberry Pi or BeagleBone.
 
-Supports Node.js versions 10, 12, 14, 15 and 16.
+Supports Node.js versions 10, 12, 14, 16 and 17.
 
 ## Contents
 
